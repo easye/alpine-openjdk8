@@ -15,16 +15,18 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
       make gcc binutils \
       emacs xauth
 
+ENV var /var/local/
+RUN mkdir -p ${var}
+WORKDIR ${var}
+
+RUN echo "deb http://httpredir.debian.org/debian jessie-backports main contrib non-free" >> /etc/apt/sources.list && apt-get update
+
 RUN export DEBIAN_FRONTEND='noninteractive' && \
-    apt-get install openjdk8
+    apt-get install -y openjdk-8-jdk
 
 #ENV JAVA_HOME /usr/lib/jvm/java-1.8-openjdk
 
 # A minimal var for development work
-
-ENV var /var/local/
-RUN mkdir -p ${var}
-WORKDIR ${var}
 
 VOLUME [ "${var}" ]
 

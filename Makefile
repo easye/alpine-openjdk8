@@ -1,7 +1,7 @@
 # necessary for macOS
-DOCKER=/usr/local/bin/docker
+#DOCKER=/usr/local/bin/docker
 #DOCKER	:= $(shell which docker)
-#DOCKER = docker
+DOCKER = docker
 
 APG = apg
 #APG	:= $(shell which apg)

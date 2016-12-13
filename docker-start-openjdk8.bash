@@ -5,11 +5,11 @@ DIR="$(cd -P "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # Engine instance)
 name=openjdk8
 
-#DOCKER="$(which docker)"
-DOCKER=/usr/local/bin/docker
+DOCKER="$(which docker)"
+#DOCKER=/usr/local/bin/docker
 
 if [[ -z $1 ]]; then
-    image=easye/alpine-openjdk8:latest
+    image=easye/openjdk8:latest
 else
     image=$1
 fi

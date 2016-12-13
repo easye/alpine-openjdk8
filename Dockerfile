@@ -22,7 +22,7 @@ WORKDIR ${var}
 RUN echo "deb http://httpredir.debian.org/debian jessie-backports main contrib non-free" >> /etc/apt/sources.list && apt-get update
 
 RUN export DEBIAN_FRONTEND='noninteractive' && \
-    apt-get install -y openjdk-8-jdk
+    apt-get install -y openjdk-8-jdk ant 
 
 #ENV JAVA_HOME /usr/lib/jvm/java-1.8-openjdk
 
@@ -30,5 +30,5 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
 
 VOLUME [ "${var}" ]
 
-CMD ["bash"]
+CMD ["/bin/bash -c while true; do sleep 1; done"]
 

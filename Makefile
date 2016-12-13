@@ -10,7 +10,6 @@ docker_id="easye/openjdk8"
 
 .PHONY: start
 start: all
-	$(DOCKER) rm openjdk8
 	bash -c ./docker-start-openjdk8.bash
 
 .PHONY: all 
@@ -26,3 +25,7 @@ generate-secret: http-api-secret
 # Assuming bash
 http-api-secret:
 	$(APG) -c ${SEED} | head -1 > http-api-secret
+
+.PHONE:
+clean:
+	$(DOCKER) rm openjdk8

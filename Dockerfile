@@ -1,18 +1,24 @@
-FROM alpine:latest
-
-# Alpine Linux - OpenJDK8 Dockerfile
-
+# Linux OpenJDK8 Dockerfile
 MAINTAINER <easye@not.org>
+FROM debian:latest
 
 USER root
 
-RUN \
-  apk update && \
-  apk upgrade && \
-  apk add openjdk8 && \
-  rm -rf /var/cache/apk/*
+RUN export DEBIAN_FRONTEND='noninteractive' && \
+    apt-get update  && \
+    apt-get upgrade -y && \
+    apt-get install -y \
+      screen \
+      git mercurial python-dulwich \
+      wget rsync \
+      net-tools coreutils \
+      make gcc binutils \
+      emacs xauth
 
-ENV JAVA_HOME /usr/lib/jvm/java-1.8-openjdk
+RUN export DEBIAN_FRONTEND='noninteractive' && \
+    apt-get install openjdk8
+
+#ENV JAVA_HOME /usr/lib/jvm/java-1.8-openjdk
 
 # A minimal var for development work
 
@@ -22,6 +28,5 @@ WORKDIR ${var}
 
 VOLUME [ "${var}" ]
 
-RUN apk add emacs screen wget mercurial xauth bash
 CMD ["bash"]
 

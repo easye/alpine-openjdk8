@@ -6,6 +6,8 @@ DOCKER=/usr/local/bin/docker
 APG = apg
 #APG	:= $(shell which apg)
 
+docker_id="easye/openjdk8"
+
 .PHONY: start
 start: all
 	$(DOCKER) rm openjdk8
@@ -13,7 +15,7 @@ start: all
 
 .PHONY: all 
 all: generate-secret
-	$(DOCKER) build -t easye/alpine-openjdk8 .
+	$(DOCKER) build -t $(docker_id) .
 
 SEED=s3cr3t
 

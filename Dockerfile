@@ -1,6 +1,6 @@
 # Linux OpenJDK8 Dockerfile
-MAINTAINER <easye@not.org>
 FROM debian:latest
+MAINTAINER <easye@not.org>
 
 USER root
 

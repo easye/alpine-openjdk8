@@ -1,20 +1,23 @@
 # necessary for macOS
-#DOCKER=/usr/local/bin/docker
+DOCKER=/usr/local/bin/docker
 #DOCKER	:= $(shell which docker)
-DOCKER = docker
+#DOCKER = docker
 
 APG = apg
 #APG	:= $(shell which apg)
 
-docker_id="easye/openjdk8"
+id="easye/openjdk8"
 
 .PHONY: start
-start: all
+start: generate-secret
 	bash -c ./docker-start-openjdk8.bash
 
 .PHONY: all 
-all: generate-secret
-	$(DOCKER) build -t $(docker_id) .
+all: generate-secret start
+
+.PHONY: build
+build:
+	$(DOCKER) build -t $(id) .
 
 SEED=s3cr3t
 

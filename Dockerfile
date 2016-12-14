@@ -24,11 +24,15 @@ RUN echo "deb http://httpredir.debian.org/debian jessie-backports main contrib n
 RUN export DEBIAN_FRONTEND='noninteractive' && \
     apt-get install -y openjdk-8-jdk ant 
 
-#ENV JAVA_HOME /usr/lib/jvm/java-1.8-openjdk
+ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
 
 # A minimal var for development work
 
 VOLUME [ "${var}" ]
 
-CMD ["/bin/bash -c while true; do sleep 1; done"]
+RUN useradd -ms /bin/bash java
+USER java
+RUN echo "JAVA_HOME=${JAVA_HOME}" >> /home/java/jd8-env.sh
+
+CMD ["/bin/bash", "-c", "while true; do date; sleep 1; done"]
 

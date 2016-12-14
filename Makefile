@@ -8,12 +8,13 @@ APG = apg
 
 id="easye/openjdk8"
 
+.PHONY: all 
+all: build
+
 .PHONY: start
 start: generate-secret
 	bash -c ./docker-start-openjdk8.bash
 
-.PHONY: all 
-all: generate-secret start
 
 .PHONY: build
 build:

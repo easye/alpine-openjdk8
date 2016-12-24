@@ -22,7 +22,7 @@ WORKDIR ${var}
 RUN echo "deb http://httpredir.debian.org/debian jessie-backports main contrib non-free" >> /etc/apt/sources.list && apt-get update
 
 RUN export DEBIAN_FRONTEND='noninteractive' && \
-    apt-get install -y openjdk-8-jdk ant 
+    apt-get install -y openjdk-8-jdk ant maven
 
 ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
 

@@ -1,10 +1,7 @@
 # necessary for macOS
-DOCKER=/usr/local/bin/docker
+#DOCKER=/usr/local/bin/docker
 #DOCKER	:= $(shell which docker)
-#DOCKER = docker
-
-APG = apg
-#APG	:= $(shell which apg)
+DOCKER = docker
 
 id="easye/openjdk8"
 
@@ -12,24 +9,13 @@ id="easye/openjdk8"
 all: build
 
 .PHONY: start
-start: generate-secret
+start: 
 	bash -c ./docker-start-openjdk8.bash
-
 
 .PHONY: build
 build:
 	$(DOCKER) build -t $(id) .
 
-SEED=s3cr3t
-
-.PHONY: generate-secret
-generate-secret: http-api-secret
-	echo "Regenerating <file:http-api-secret>."
-
-# Assuming bash
-http-api-secret:
-	$(APG) -c ${SEED} | head -1 > http-api-secret
-
-.PHONE:
+.PHONY:
 clean:
 	$(DOCKER) rm openjdk8

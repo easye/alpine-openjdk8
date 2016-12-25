@@ -17,9 +17,10 @@ fi
 host_d=$(pwd)/var
 var_d=/var/tmp/easye/openjdk8
 
-mkdir -p ${var_d}
+#mkdir -p ${var_d}
 
-options="$options --publish 12712:12712"
+options=""
+#options="$options --publish 12712:12712"
 #options="$options --volume=${host_d}:${var_d}"
 
 $DOCKER run --detach --name $name $options $image

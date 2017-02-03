@@ -1,8 +1,8 @@
-# A Dockerification of OpenJDK8
+* A Dockerification of OpenJDK8
 
-# Problems
+* Problems
 
-## Build broken
+** Build broken
 
 This Dockerfile currently fails to build.
 
@@ -10,7 +10,7 @@ Due to Debian jessie-backports problems as detailed in
 
 <https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=851667>
 
-### Failing output
+*** Failing output
 #+BEGIN_ASCII
 Step 8 : RUN export DEBIAN_FRONTEND='noninteractive' &&     apt-get install -y openjdk-8-jdk
  ---> Running in 4318975e56d4

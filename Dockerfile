@@ -1,5 +1,5 @@
 # Linux OpenJDK8 Dockerfile
-FROM debian:latest
+FROM debian:backports
 MAINTAINER <easye@not.org>
 
 USER root
@@ -19,15 +19,13 @@ ENV var /var/local/
 RUN mkdir -p ${var}
 WORKDIR ${var}
 
-RUN echo "deb http://httpredir.debian.org/debian jessie-backports main contrib non-free" >> /etc/apt/sources.list && apt-get update
-
 RUN export DEBIAN_FRONTEND='noninteractive' && \
     apt-get install -y openjdk-8-jdk ant maven
 
 ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
 
 # Now remove Java7
-RUN apt-get remove -y openjdk-7-jre openjdk-7-jre-headless
+#RUN apt-get remove -y openjdk-7-jre openjdk-7-jre-headless
 
 # A minimal var for development work
 

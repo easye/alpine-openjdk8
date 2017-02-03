@@ -1,0 +1,33 @@
+# A Dockerification of OpenJDK8
+
+# Problems
+
+## Build broken
+
+This Dockerfile currently fails to build.
+
+Due to Debian jessie-backports problems as detailed in
+
+<https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=851667>
+
+### Failing output
+#+BEGIN_ASCII
+Step 8 : RUN export DEBIAN_FRONTEND='noninteractive' &&     apt-get install -y openjdk-8-jdk
+ ---> Running in 4318975e56d4
+Reading package lists...
+Building dependency tree...
+Reading state information...
+Some packages could not be installed. This may mean that you have
+requested an impossible situation or if you are using the unstable
+distribution that some required packages have not yet been created
+or been moved out of Incoming.
+The following information may help to resolve the situation:
+
+The following packages have unmet dependencies:
+ openjdk-8-jdk : Depends: openjdk-8-jre (= 8u121-b13-1~bpo8+1) but it is not going to be installed
+                 Depends: openjdk-8-jdk-headless (= 8u121-b13-1~bpo8+1) but it is not going to be installed
+^[[91mE: Unable to correct problems, you have held broken packages.
+^[[0mThe command '/bin/sh -c export DEBIAN_FRONTEND='noninteractive' &&     apt-get install -y openjdk-8-jdk' returned a non-zero code: 10\
+0
+#+END_ASCII
+

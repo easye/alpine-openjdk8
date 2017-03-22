@@ -1,9 +1,11 @@
 # Linux OpenJDK8 Dockerfile
-FROM debian:backports
+FROM debian:jessie-backports
 MAINTAINER <easye@not.org>
 
 USER root
 
+# A highly subjective set of "developer" oriented packages that are
+# not strictly necessary to get "only" a jdk
 RUN export DEBIAN_FRONTEND='noninteractive' && \
     apt-get update  && \
     apt-get upgrade -y && \
@@ -13,22 +15,26 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
       wget rsync \
       net-tools coreutils \
       make gcc binutils \
-      emacs xauth
+      emacs xauth \
+      locales
+
+RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen \
+  && locale-gen \
+  && update-locale LANG=en_US.UTF-8
 
 ENV var /var/local/
 RUN mkdir -p ${var}
 WORKDIR ${var}
 
 RUN export DEBIAN_FRONTEND='noninteractive' && \
-    apt-get install -y openjdk-8-jdk ant maven
+    apt-get install -y  -t jessie-backports openjdk-8-jdk ant maven
 
 ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
 
 # Now remove Java7
-#RUN apt-get remove -y openjdk-7-jre openjdk-7-jre-headless
+RUN apt-get remove -y openjdk-7-jre openjdk-7-jre-headless
 
 # A minimal var for development work
-
 VOLUME [ "${var}" ]
 
 USER root

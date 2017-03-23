@@ -21,10 +21,11 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
 RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen \
   && locale-gen \
   && update-locale LANG=en_US.UTF-8
+ENV LANG "en_US.UTF-8" 
 
-ENV var /var/local/
-RUN mkdir -p ${var}
-WORKDIR ${var}
+ENV var_local /var/local/
+RUN mkdir -p ${var_local}
+WORKDIR ${var_local}
 
 RUN export DEBIAN_FRONTEND='noninteractive' && \
     apt-get install -y  -t jessie-backports openjdk-8-jdk ant maven
@@ -35,7 +36,7 @@ ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
 RUN apt-get remove -y openjdk-7-jre openjdk-7-jre-headless
 
 # A minimal var for development work
-VOLUME [ "${var}" ]
+VOLUME [ "${var_local}" ]
 
 USER root
 RUN useradd -ms /bin/bash java
